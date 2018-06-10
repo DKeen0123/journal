@@ -1,44 +1,27 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
-import { createStackNavigator } from 'react-navigation';
-import navStyles from './styles/navStyles';
+import { ApolloProvider } from 'react-apollo';
+import { HttpLink, ApolloClient } from 'apollo-boost';
+import { InMemoryCache } from 'apollo-boost';
 
-import Post from './Post';
+import Navigator from './Navigator';
 
-class App extends React.Component {
-  static navigationOptions = {
-    title: "Home",
-    ...navStyles
-  }
+const client = new ApolloClient({
+  link: new HttpLink({
+    uri: "https://api.graph.cool/simple/v1/cji75xsaq6z4o0167if2nvbfo"
+  }),
+  cache: new InMemoryCache()
+});
 
-  goToPost = () => {
-    this.props.navigation.navigate('Post');
-  }
+export default class App extends React.Component {
+
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Hello World</Text>
-        <Button onPress={this.goToPost} title="Go to post page" />
-      </View>
+      <ApolloProvider client={client}>
+        <Navigator />
+      </ApolloProvider>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 
 
-export default createStackNavigator({
-  Home: {
-    screen: App
-  },
-  Post: {
-    screen: Post
-  }
-});
