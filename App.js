@@ -13,7 +13,6 @@ const client = new ApolloClient({
 });
 
 export default class App extends React.Component {
-
   render() {
     return (
       <ApolloProvider client={client}>
