@@ -5,7 +5,7 @@ import gql from 'graphql-tag';
 
 class Posts extends Component {
   render() {
-    const { loading, allPosts, navigation }= this.props;
+    const { loading, allPosts, navigation } = this.props;
     if (loading) return null
     return (
       <View>
@@ -29,7 +29,7 @@ class Posts extends Component {
 }
 
 const postsQuery = gql`
-  {
+  query postsQuery {
     allPosts {
       id
       title
