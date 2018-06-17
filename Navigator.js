@@ -6,6 +6,7 @@ import { Fab, Icon } from 'native-base';
 import Post from './components/posts/Post';
 import NewPost from './components/posts/NewPost';
 import Posts from './components/posts/Posts';
+import Login from './components/user/Login';
 import navStyles from './styles/navStyles';
 
 class Home extends React.Component {
@@ -27,7 +28,7 @@ class Home extends React.Component {
       <View style={styles.container}>
         <Posts {...this.props}/>
         <Fab
-           style={styles.newPost}
+          style={styles.newPost}
           onPress={this.goToNewPost}
         >
           <Icon name="add" />
@@ -44,15 +45,11 @@ const styles = StyleSheet.create({
   },
   newPost: {
     backgroundColor: "#82D8D8",
-  },
-  newPostText: {
-    fontSize: 20,
-    textAlign: "center"
   }
 });
 
 
-export default createStackNavigator({
+const Navigator = createStackNavigator({
   Home: {
     screen: Home
   },
@@ -63,3 +60,10 @@ export default createStackNavigator({
     screen: NewPost
   }
 });
+
+const NavWrapper = (props) => {
+  return <Login />;
+  return <Navigator />;
+}
+
+export default NavWrapper;
